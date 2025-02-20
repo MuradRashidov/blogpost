@@ -1,21 +1,29 @@
 import { fetchPostById } from '@/lib/actions/postAction';
-import { NextPage } from 'next'; // Next.js'in kendi türünü kullan
 import React from 'react';
 import SanitizeComponent from './_components/SanitizeComponent';
 import Comments from './_components/Comments';
 
 type Props = {
   params: {
-    slug: string; // Eğer `[slug]` varsa
+    slug?: string; // Eğer `[slug]` dinamik route olarak kullanılıyorsa opsiyonel olabilir
     id: string;
   };
 };
 
-const Page: NextPage<Props> = async ({ params }) => {
+const Page = async ({ params }: Props) => {
   const { id } = params;
+  
+  if (!id) {
+    return <p>Post ID bulunamadı.</p>;
+  }
+
   console.log("id", id);
 
   const { post } = await fetchPostById(Number(id));
+
+  if (!post) {
+    return <p>Post bulunamadı.</p>;
+  }
 
   return (
     <main className="mt-24">
