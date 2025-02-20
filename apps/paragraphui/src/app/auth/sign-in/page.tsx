@@ -11,7 +11,7 @@ const SignInPage = () => {
         <SignInForm />
         <Link href={"/auth/forgot"}>Forgot Your Password?</Link>
         <div className="flex items-center justify-center gap-2 mt-2">
-          <p className="text-sm text-slate-500 font-normal">Don't have an account</p>
+        <p className="text-sm text-slate-500 font-normal">Don&apos;t have an account</p>
           <a className="font-semibold text-xs underline text-blue-500" href="/auth/sign-up">Sign Up</a>
         </div>
       </div>
