@@ -1,20 +1,22 @@
 import { fetchPostById } from '@/lib/actions/postAction';
+import { NextPage } from 'next'; // Next.js'in kendi türünü kullan
 import React from 'react';
-import DOMPurify from "dompurify"
 import SanitizeComponent from './_components/SanitizeComponent';
 import Comments from './_components/Comments';
 
-type PageProps = {
+type Props = {
   params: {
+    slug: string; // Eğer `[slug]` varsa
     id: string;
   };
 };
 
-const page = async ({ params }: PageProps) => {
-  const { id } =  params;
+const Page: NextPage<Props> = async ({ params }) => {
+  const { id } = params;
   console.log("id", id);
-  
-  const { post } = await fetchPostById(+id);
+
+  const { post } = await fetchPostById(Number(id));
+
   return (
     <main className="mt-24">
       <div className="container max-w-[70%] mx-auto">
@@ -24,27 +26,28 @@ const page = async ({ params }: PageProps) => {
             <div className="flex justify-between items-center">
               <div className="flex flex-col bg-gray-200 shadow-md rounded-md p-2">
                 <p className="text-lg font-bold">Published By: </p>
-                <p className="text-sm font-semibold">
-                  {post.author.name}
-                </p>
+                <p className="text-sm font-semibold">{post.author.name}</p>
               </div>
-              <span><img className="w-50 h-10 rounded-full" src={post.author.avatar ?? ""} alt="author" /></span>
+              <span>
+                <img className="w-50 h-10 rounded-full" src={post.author.avatar ?? ""} alt="author" />
+              </span>
             </div>
-            <SanitizeComponent content={post.content}/>
-            <span className="text-xs flex-grow items-end font-light flex w-full justify-end px-2">{new Date(post.createdAt).toLocaleString()}</span>
+            <SanitizeComponent content={post.content} />
+            <span className="text-xs flex-grow items-end font-light flex w-full justify-end px-2">
+              {new Date(post.createdAt).toLocaleString()}
+            </span>
           </div>
-
-          <div className="w-full h-full md:w-[40%] flex group  justify-end relative">
+          <div className="w-full h-full md:w-[40%] flex group justify-end relative">
             <div className="items-center text-orange-700 text-3xl justify-center absolute top-0 left-0 z-50 w-full h-full hidden group-hover:flex bg-black cursor-pointer opacity-50 transition-all duration-200">
               Post Image
             </div>
-            <img className="w-[100%] h-full  object-cover" src={post.thumbnail ?? ""} alt="post" />
+            <img className="w-[100%] h-full object-cover" src={post.thumbnail ?? ""} alt="post" />
           </div>
         </div>
       </div>
-      <Comments postId={post.id}/>
+      <Comments postId={post.id} />
     </main>
   );
 };
 
-export default page;
+export default Page;
