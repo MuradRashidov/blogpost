@@ -4,18 +4,13 @@ import React from 'react';
 import SanitizeComponent from './_components/SanitizeComponent';
 import Comments from './_components/Comments';
 
-type Props = Promise<{
-  
-    params: {
-      slug: string; 
-      id: string;
-    
-  }
-}>
+type Props = {
+  params: Promise<{ id: string }>
+}
 
-const Page= async (props:Props) => {
+const Page = async ({params}:Props) => {
+  const {id} = await params;
 
-  const { id } = (await props).params;
   console.log("id", id);
 
   const { post } = await fetchPostById(Number(id));
