@@ -4,14 +4,14 @@ import DOMPurify from "dompurify"
 import SanitizeComponent from './_components/SanitizeComponent';
 import Comments from './_components/Comments';
 
-type Props = {
+type PageProps = {
   params: {
     id: string;
-  }
-}
+  };
+};
 
-const page = async ({ params }: Props) => {
-  const { id } = await params;
+const page = async ({ params }: PageProps) => {
+  const { id } =  params;
   console.log("id", id);
   
   const { post } = await fetchPostById(+id);
