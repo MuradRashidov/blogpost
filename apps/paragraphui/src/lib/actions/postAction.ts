@@ -15,12 +15,12 @@ export const fetchPosts = async ({
   console.log(take, skip);
 
   const data = await fetchGraphql(print(GET_POSTS), { skip, take });
-  console.log(data);
+  //console.log(data);
   return { posts: data.posts as Post[], totalPosts: data.postCount };
 };
 
 export const fetchPostById = async (id: number) => {
   const data = await fetchGraphql(print(GET_POST_BY_ID), { id });
-  console.log("sds",data.getPostById);
+  //console.log("sds",data.getPostById);
   return {post:data.getPostById as Post};
 };

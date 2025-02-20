@@ -37,3 +37,13 @@ export const GET_POST_COMMENTS = gql`
     getCommentCount(postId: $postId)
   }
 `;
+
+export const CREATE_COMMENT_MUTATION = gql`
+  mutation createComment($createCommentInput: CreateCommentInput!) {
+    createComment(createCommentInput: $createCommentInput) {
+      id
+      content
+      createdAt
+    }
+  }
+`;

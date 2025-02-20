@@ -1,7 +1,10 @@
-import { fetchGraphql } from "../fetchGraphql";
+"use server"
+import { authFetchGraphql, fetchGraphql } from "../fetchGraphql";
 import { print } from "graphql";
-import { GET_POST_COMMENTS } from "../gqlMutations";
+import { CREATE_COMMENT_MUTATION, GET_POST_COMMENTS } from "../gqlMutations";
 import { CommentEntity } from "../types/modelTypes";
+import { CreateCommentFormState } from "../types/formState";
+import { commentFormSchema } from "../zod-schemas/commentFormSchema";
 export const fetchPostComments = async ({
   postId,
   skip,
@@ -19,5 +22,43 @@ export const fetchPostComments = async ({
   return {
     comments: data.getPostComments as CommentEntity[],
     count: data.getCommentCount as number,
+  };
+};
+
+export const createComment = async (
+  state: CreateCommentFormState,
+  formData: FormData
+): Promise<CreateCommentFormState> => {
+  console.log("Create_Comment");
+  
+  const validatedFields = commentFormSchema.safeParse(
+    Object.fromEntries(formData.entries())
+  );
+  if (!validatedFields.success) {
+    console.log("data");
+
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      data: Object.fromEntries(formData.entries()),
+    };
+  }
+  const data = await authFetchGraphql(print(CREATE_COMMENT_MUTATION), {
+    createCommentInput: {
+      ...validatedFields.data,
+    },
+  });
+  if (data) {
+    console.log("data");
+    
+    return {
+      message: "Success, your comment added",
+      ok: true,
+      open: false,
+    };
+  }
+  return {
+    message: "Something went wrong",
+    ok: false,
+    open: true,
   };
 };

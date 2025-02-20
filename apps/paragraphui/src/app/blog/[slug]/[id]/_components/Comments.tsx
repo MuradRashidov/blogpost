@@ -5,13 +5,16 @@ import { fetchPostComments } from '@/lib/actions/commentActions'
 import { DEFAULT_PAGE_SIZE } from '@/lib/constants'
 import CommentCard from './CommentCard'
 import CommentPagination from './CommentPagination'
-import {CommentCardSkeleton} from './CommentCardSceleton'
+import { CommentCardSkeleton } from './CommentCardSceleton'
+import { SessionUser } from '@/lib/session'
+import CreateComment from './CreateComment'
 type Props = {
-    postId: number
+    postId: number;
+    user?: SessionUser
 }
-const Comments = ({ postId }: Props) => {
+const Comments = ({ postId, user }: Props) => {
     const [page, setPage] = useState(1);
-    const { data, isLoading } = useQuery({
+    const { data, isLoading, refetch } = useQuery({
         queryKey: ["GET_POST_COMMENTS", postId, page],
         queryFn: async () => await fetchPostComments({
             postId,
@@ -23,6 +26,7 @@ const Comments = ({ postId }: Props) => {
     return (
         <div className="rounded-md shadow-md p-2">
             <h6 className="text-lg to-slate-700">Comments</h6>
+            {!!user && <CreateComment postId={postId} user={user} refetch={refetch}/>}
             <div className="flex flex-col gap-2">
                 {isLoading
                     ? Array.from({ length: 12 }).map((_, index) => (

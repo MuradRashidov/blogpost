@@ -46,7 +46,7 @@ const CommentPagination = ({
           disabled={page === "..."}
           className={cn("px-3 py-1 rounded-md transition hover:text-sky-600", {
             "bg-slate-200": currentPage !== page && page !== "...",
-            "bg-blue-500 text-white": currentPage === page,
+            "bg-orange-500 text-white": currentPage === page,
             "cursor-not-allowed": page === "...",
           })}
         >

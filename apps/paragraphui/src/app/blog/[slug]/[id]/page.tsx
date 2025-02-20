@@ -3,6 +3,7 @@ import { NextPage } from 'next'; // Next.js'in kendi türünü kullan
 import React from 'react';
 import SanitizeComponent from './_components/SanitizeComponent';
 import Comments from './_components/Comments';
+import { getSession } from '@/lib/session';
 
 type Props = {
   params: Promise<{ id: string }>
@@ -10,13 +11,11 @@ type Props = {
 
 const Page = async ({params}:Props) => {
   const {id} = await params;
-
-  console.log("id", id);
-
   const { post } = await fetchPostById(Number(id));
+  const session = await getSession();
 
   return (
-    <main className="md:mt-24">
+    <main className="mt-24">
       <div className="container max-w-[70%] mx-auto">
         <h2 className="font-semibold text-2xl tracking-tight text-center">{post.title}</h2>
         <div className="flex flex-col md:flex-row w-full h-[70vh] mt-5">
@@ -36,14 +35,14 @@ const Page = async ({params}:Props) => {
             </span>
           </div>
           <div className="w-full h-full md:w-[40%] flex group justify-end relative">
-            <div className="items-center text-orange-700 text-3xl justify-center absolute top-0 left-0 z-50 w-full h-full hidden group-hover:flex bg-black cursor-pointer opacity-50 transition-all duration-200">
+            <div className="font-bold items-center text-orange-700 text-3xl justify-center absolute top-0 left-0 z-30 w-full h-full hidden group-hover:flex bg-black cursor-pointer opacity-50 transition-all duration-200">
               Post Image
             </div>
             <img className="w-[100%] h-full object-cover" src={post.thumbnail ?? ""} alt="post" />
           </div>
         </div>
       </div>
-      <Comments postId={post.id} />
+      <Comments postId={post.id} user={session?.user} />
     </main>
   );
 };
