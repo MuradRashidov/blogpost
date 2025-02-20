@@ -16,7 +16,7 @@ const Page = async ({params}:Props) => {
   const { post } = await fetchPostById(Number(id));
 
   return (
-    <main className="mt-24">
+    <main className="md:mt-24">
       <div className="container max-w-[70%] mx-auto">
         <h2 className="font-semibold text-2xl tracking-tight text-center">{post.title}</h2>
         <div className="flex flex-col md:flex-row w-full h-[70vh] mt-5">
