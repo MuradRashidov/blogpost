@@ -4,6 +4,7 @@ import React from 'react';
 import SanitizeComponent from './_components/SanitizeComponent';
 import Comments from './_components/Comments';
 import { getSession } from '@/lib/session';
+import Like from './_components/Like';
 
 type Props = {
   params: Promise<{ id: string }>
@@ -42,6 +43,7 @@ const Page = async ({params}:Props) => {
           </div>
         </div>
       </div>
+      <Like postId={post.id} user={session?.user}/>
       <Comments postId={post.id} user={session?.user} />
     </main>
   );
