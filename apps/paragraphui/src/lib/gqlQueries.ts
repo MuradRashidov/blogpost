@@ -33,3 +33,10 @@ export const GET_POST_BY_ID = gql`
     }
   }
 `;
+
+export const POST_LIKES = gql`
+  query postLikeData($postId:Int!){
+     getPostLikesCount(postId:$postId)
+     userLikedPost(postId:$postId)
+}
+`
