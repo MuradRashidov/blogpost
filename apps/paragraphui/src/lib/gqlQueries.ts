@@ -40,3 +40,21 @@ export const POST_LIKES = gql`
      userLikedPost(postId:$postId)
 }
 `
+export const GET_USER_POSTS = gql`
+  query GetUserPosts($skip: Int, $take: Int) {
+    getUserPosts(skip: $skip, take: $take) {
+      id
+      title
+      slug
+      thumbnail
+      published
+      createdAt
+      content
+      _count {
+        likes
+        comments
+      }
+    }
+    userPostCount
+  }
+`;

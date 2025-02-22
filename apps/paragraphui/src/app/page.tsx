@@ -12,7 +12,7 @@ export default async function Home({ searchParams }: Props) {
   const { page } = await searchParams;
   const { posts, totalPosts } = await fetchPosts({ page: page ? +page : undefined });
   const session = await getSession();
-  console.log(session);
+  //console.log(session);
 
   return (
     <div className="bg-gradient-to-br text-white">

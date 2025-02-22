@@ -14,7 +14,6 @@ export const SignUp = async (
   state: SignUpFormState,
   formData: FormData
 ): Promise<SignUpFormState> => {
-    console.log("fdsfdsgdfgdg");
     
   const validatedFields = SignUpFormSchema.safeParse(
     Object.fromEntries(formData.entries())
@@ -35,13 +34,9 @@ export const SignUp = async (
   }
 };
 
-export const SignIn = async (state:SignInFormState,formData:FormData):Promise<SignInFormState> => {
-  console.log("testttt");
-  
+export const SignIn = async (state:SignInFormState,formData:FormData):Promise<SignInFormState> => {  
     const validatedFields = SignInFormSchema.safeParse(Object.fromEntries(formData.entries()));
-    if(!validatedFields.success){
-      console.log("fgfdggfhgfh");
-      
+    if(!validatedFields.success){    
       return {
         errors:validatedFields.error.flatten().fieldErrors,
         data: Object.fromEntries(formData.entries())
@@ -52,8 +47,6 @@ export const SignIn = async (state:SignInFormState,formData:FormData):Promise<Si
         ...validatedFields.data
       }
     })
-    console.log("fgg",data.signIn.name);
-
     if(data.errors) {
       return {
         message:"Invalid credentials",
@@ -69,7 +62,6 @@ export const SignIn = async (state:SignInFormState,formData:FormData):Promise<Si
         },
         accessToken:data.signIn.token
       })
-      console.log("asdfghj");
       revalidatePath("/")
       redirect("/")
     }

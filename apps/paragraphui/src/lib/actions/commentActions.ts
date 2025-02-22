@@ -28,15 +28,11 @@ export const fetchPostComments = async ({
 export const createComment = async (
   state: CreateCommentFormState,
   formData: FormData
-): Promise<CreateCommentFormState> => {
-  console.log("Create_Comment");
-  
+): Promise<CreateCommentFormState> => {  
   const validatedFields = commentFormSchema.safeParse(
     Object.fromEntries(formData.entries())
   );
   if (!validatedFields.success) {
-    console.log("data");
-
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       data: Object.fromEntries(formData.entries()),

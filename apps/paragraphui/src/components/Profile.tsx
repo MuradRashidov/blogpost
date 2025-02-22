@@ -28,18 +28,18 @@ const Profile = ({ user }: Props) => {
                         <div className="border-t bg-gray-600" />
                     </div>
                     <div 
-                     className="*:grid *:grid-cols-5 *:gap-3 *:my-2 *:py-2 [&>*>span]:col-span-4 [&>*:hover]:bg-orange-400 *:transition *:rounded-md [&>*:hover]:text-white [&>*>*:nth-child(1)]:justify-self-end">
+                     className="*:grid *:grid-cols-5 *:gap-3 *:my-2 *:py-2 [&>*]:items-center [&>*>span]:col-span-4 [&>*:hover]:bg-orange-400 *:transition *:rounded-md [&>*:hover]:text-white [&>*>*:nth-child(1)]:justify-self-end">
                         <a href="/api/auth/signout">
                            <ArrowRightStartOnRectangleIcon className="w-4"/>
                            <span> Sign Out</span>
                         </a>
                         <Link href="/user/create-post">
                            <PencilSquareIcon className="w-4"/>
-                           <span>Create new post</span>
+                           <span>Yeni Post</span>
                         </Link>
-                        <Link href="/user/create-post">
+                        <Link href="/user/posts">
                            <ListBulletIcon className="w-4"/>
-                           <span>Create new post</span>
+                           <span>Postlarım</span>
                         </Link>
                     </div>
                 </div>

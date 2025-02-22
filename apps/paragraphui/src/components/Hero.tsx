@@ -1,14 +1,17 @@
+import { HERO_TEXT } from '@/lib/constants'
 import React from 'react'
 
 const Hero = () => {
     return (
-        <div className="bg-gradient-to-br from-orange-500 to-orange-600 text-white pt-24">
-            <div className="container mx-auto flex flex-col md:flex-row items-center flex-wrap px-3">
-                <div className="flex flex-col w-full mx-auto  justify-center items-start text-center md:text-left md:w-2/5">
-                    <p className="capitalize tracking-wide mx-auto w-full text-slate-300 text-sm from-neutral-500 md:w-[80%] text-center ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos eos, voluptatem illo accusantium cum obcaecati!</p>
-                    <h2 className="my-5 text-5xl font-bold leading-tight text-slate-200 text-center flex justify-center mx-auto">Welcome to Paragraph</h2>
+        <div className="bg-gradient-to-br from-orange-500 to-orange-600 text-white pt-5 md:pt-24">
+            <div className="container mx-auto flex flex-col md:flex-row flex-wrap">
+                <div className="flex flex-col w-full mx-auto md:mt-32  justify-start items-start md:text-left md:w-2/5">
+                    <h3 className="text-3xl font-bold leading-tight text-slate-200 text-center flex justify-center mx-auto">Paragrapha xoş gəlmisiniz</h3>
+                    <p className="my-5 tracking-wide mx-auto w-full text-black  text-xl font-semibold md:w-[80%] text-center ">
+                        {HERO_TEXT}
+                    </p>
                     <p className="whitespace-nowrap overflow-hidden block w-full animate-marquee capitalize leading-normal text-xl">
-                        Join our community Lorem ipsum dolor sit amet.
+                        Lorem ipsum dolor sit amet, consectetur.
                     </p>
                 </div>
 
