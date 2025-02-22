@@ -39,7 +39,7 @@ const Page = async ({params}:Props) => {
             <div className="font-bold items-center text-orange-700 text-3xl justify-center absolute top-0 left-0 z-30 w-full h-full hidden group-hover:flex bg-black cursor-pointer opacity-50 transition-all duration-200">
               Post Image
             </div>
-            <img className="w-[100%] h-full object-cover" src={post.thumbnail ?? ""} alt="post" />
+            <img className="w-[100%] h-full object-cover" src={post.thumbnail || ""} alt="post" />
           </div>
         </div>
       </div>
