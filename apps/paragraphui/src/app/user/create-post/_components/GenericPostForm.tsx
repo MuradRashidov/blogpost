@@ -9,11 +9,12 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 type Props = {
+    type?: string,
     state: PostFormState,
     formAction: (formdata: FormData) => void
 }
 
-const GenericPostForm = ({ state, formAction }: Props) => {
+const GenericPostForm = ({ state, formAction,type="save" }: Props) => {
     const [imageUrl, setImageUrl] = useState("");
     const { toast } = useToast();
     useEffect(() => {
@@ -24,6 +25,9 @@ const GenericPostForm = ({ state, formAction }: Props) => {
     }, [state])
     return (
         <form className="[&>*]:w-full flex flex-col justify-center items-center gap-4 shadow-md border p-4 rounded-md" action={formAction}>
+            <div>
+                <input name="postId" hidden value={state?.data?.postId || ""} onChange={() => null}/>
+            </div>
             <div>
                 <Label htmlFor="title">Başlıq</Label>
                 <Input name="title" placeholder="Başlıq əlavə edin..." defaultValue={state?.data?.title} />
@@ -48,8 +52,8 @@ const GenericPostForm = ({ state, formAction }: Props) => {
                         e.target.files && setImageUrl(URL.createObjectURL(e.target.files[0]))
                     }}
                 />
-                {imageUrl &&
-                    <Image className="my-2" src={imageUrl} width={200} height={200} alt="image" />
+                {(!!imageUrl || !!state?.data?.previousThumbnailUrl) && 
+                    <Image className="my-2" src={imageUrl || state?.data?.previousThumbnailUrl || " "} width={200} height={200} alt="image" />
                 }
             </div>
             {!!state?.errors?.thumbnail && (
@@ -70,7 +74,7 @@ const GenericPostForm = ({ state, formAction }: Props) => {
             {!!state?.errors?.isPublished && (
                 <p className="text-red-500 animate-shake">{state.errors.isPublished}</p>
             )}
-            <Button>Save</Button>
+            <Button>{type}</Button>
         </form>
     );
 };

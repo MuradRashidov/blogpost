@@ -13,7 +13,7 @@ const UserPostPage = async ({ searchParams }: Props) => {
     pageSize: DEFAULT_PAGE_SIZE
   })
   return (
-    <div className="mt-4 md:mt-24">
+    <div className="mt-4 w-full md:mt-24">
       {(!posts || !posts.length) ? <NoPost /> : <PostList posts={posts} totalPages={DEFAULT_PAGE_SIZE / totalPosts} currentPage={page ? +page : 1} />}
     </div>
   )

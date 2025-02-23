@@ -5,7 +5,7 @@ import { Post } from "../types/modelTypes";
 import { transformTakeSkip } from "../helpers";
 import { PostFormState } from "../types/formState";
 import { PostFormSchema } from "../zod-schemas/postFormSchema";
-import { CREATE_POST_MUTATION } from "../gqlMutations";
+import { CREATE_POST_MUTATION, DELETE_POST_MUTATION, UPDATE_POST_MUTATION } from "../gqlMutations";
 import { uploadThumbnail } from "../upload";
 
 export const fetchPosts = async ({
@@ -72,10 +72,10 @@ export async function saveNewPost(
     thumbnailUrl = await uploadThumbnail(validatedFields.data.thumbnail);
   }
   // Todo: call garphql api
-
+  const {postId,...input} = validatedFields.data;
   const data = await authFetchGraphql(print(CREATE_POST_MUTATION), {
     input: {
-      ...validatedFields.data,
+      ...input,
       thumbnail: thumbnailUrl,
     },
   });
@@ -85,4 +85,45 @@ export async function saveNewPost(
     message: "Oops, Something Went Wrong",
     data: Object.fromEntries(formData.entries()),
   };
+}
+
+export async function updatePost(state:PostFormState,formData:FormData):Promise<PostFormState>{
+    const validatedFields = PostFormSchema.safeParse(Object.fromEntries(formData.entries()));
+    if(!validatedFields.success){
+      return {
+        data:Object.fromEntries(formData.entries()),
+        errors: validatedFields.error.flatten().fieldErrors
+      }
+    }
+    
+    const {thumbnail,...updateData} = validatedFields.data
+    console.log("Updatedata: ",updateData);
+    
+    let thumbnailUrl;
+    if(thumbnail){
+         thumbnailUrl = await uploadThumbnail(thumbnail)
+    }
+    const data = await authFetchGraphql(print(UPDATE_POST_MUTATION),{
+      updatePostInput:{
+        ...validatedFields.data,
+        ...(thumbnailUrl && {thumbnail:thumbnailUrl})
+      }
+    })
+
+    if (data) return { message: "Success! New Post Saved", ok: true };
+  return {
+    message: "Oops, Something Went Wrong",
+    data: Object.fromEntries(formData.entries()),
+    ok:false
+  };
+
+}
+
+export async function deletePost(postId:number):Promise<boolean>{
+    const res = await authFetchGraphql(print(DELETE_POST_MUTATION),{
+      postId
+    })
+
+    return res.deletePost
+    
 }

@@ -65,3 +65,17 @@ export const CREATE_POST_MUTATION = gql`
     }
   }
 `;
+
+export const UPDATE_POST_MUTATION = gql`
+  mutation updatePostMutation($updatePostInput: UpdatePostInput!) {
+    updatePost(updatePostInput: $updatePostInput) {
+      id
+    }
+  }
+`;
+
+export const DELETE_POST_MUTATION = gql`
+  mutation deletePost($postId: Int!) {
+    deletePost(postId: $postId)
+  }
+`;
