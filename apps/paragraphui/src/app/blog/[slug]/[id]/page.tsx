@@ -16,7 +16,7 @@ const Page = async ({params}:Props) => {
   const session = await getSession();
 
   return (
-    <main className="mt-24">
+    <main className="md:mt-24 mt-4">
       <div className="container max-w-[70%] mx-auto">
         <h2 className="font-semibold text-2xl tracking-tight text-center">{post.title}</h2>
         <div className="flex flex-col md:flex-row w-full h-[70vh] mt-5">
@@ -35,7 +35,7 @@ const Page = async ({params}:Props) => {
               {new Date(post.createdAt).toLocaleString()}
             </span>
           </div>
-          <div className="w-full h-full md:w-[40%] flex group justify-end relative">
+          <div className="mb-48 w-full h-full md:w-[40%] flex group justify-end relative">
             <div className="font-bold items-center text-orange-700 text-3xl justify-center absolute top-0 left-0 z-30 w-full h-full hidden group-hover:flex bg-black cursor-pointer opacity-50 transition-all duration-200">
               Post Image
             </div>
@@ -43,8 +43,10 @@ const Page = async ({params}:Props) => {
           </div>
         </div>
       </div>
+      <div className="mt-80 md:mt-0">
       <Like postId={post.id} user={session?.user}/>
       <Comments postId={post.id} user={session?.user} />
+      </div>
     </main>
   );
 };

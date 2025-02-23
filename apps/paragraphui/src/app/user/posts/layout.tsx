@@ -4,7 +4,7 @@ type Props = PropsWithChildren<{
 }>
 const PostsLayout = ({ modal, children }: Props) => {
     return (
-        <div className="w-[90%] md:w-[50%]">
+        <div className="w-[100%]">
             <div className="w-full">{children}</div>
             <div>{modal}</div>
         </div>

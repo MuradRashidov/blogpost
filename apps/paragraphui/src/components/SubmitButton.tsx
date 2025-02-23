@@ -9,9 +9,9 @@ const SubmitButton = ({ children, ...props }: ButtonProps) => {
   const { pending } = useFormStatus();
   return (
     <>
-      <Button variant="ghost">
+      <Button variant="destructive">
         <Link href={`${API_URL}auth/google/login`}>
-        Go On With Google
+           Google ilə davam edin
         </Link>
       </Button>
       <Button type="submit" aria-disabled={pending} {...props}>

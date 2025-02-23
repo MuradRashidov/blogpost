@@ -19,17 +19,17 @@ const [state,action] = useActionState(SignUp,undefined)
         </div>
         <div>
             <Label htmlFor="email">Email</Label>
-            <Input defaultValue={state?.data?.email} id="email" name="email" placeholder="mrdrshdv@gmail.com"/>
+            <Input defaultValue={state?.data?.email} id="email" name="email" placeholder="muradrashidov@gmail.com"/>
             {!!state?.errors?.email && <p className="text-sm text-red-500 font-semibold">{state.errors.email}</p> }
 
         </div>
         <div>
-            <Label htmlFor="password">Password</Label>
-            <Input defaultValue={state?.data?.password} id="password" name="password" placeholder="Murad"/>
+            <Label htmlFor="password">Şifrə</Label>
+            <Input defaultValue={state?.data?.password} id="password" name="password" placeholder="A1q2w3e4r%!"/>
             {state?.errors?.password?.map(err => <p key={err} className="text-sm text-red-500 font-semibold">{err}</p>) }
 
         </div>
-        <SubmitButton>Sign Up</SubmitButton>
+        <SubmitButton>Qeydiyyatdan keç</SubmitButton>
     </form>
   )
 }

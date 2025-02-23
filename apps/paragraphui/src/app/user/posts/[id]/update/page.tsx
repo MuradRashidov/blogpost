@@ -8,7 +8,7 @@ const page = async ({ params }: Props) => {
     const { id } = await params;
     const {post} = await fetchPostById(+id);
     return (
-        <div className="w-[90%] md:w-[100%] mt-8">
+        <div className="w-[90%] mx-auto md:w-[100%] mt-8">
             <UpdatePostContainer post={post}/>
         </div>
     )

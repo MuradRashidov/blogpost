@@ -21,8 +21,8 @@ const UpdatePostContainer = ({ post }: Props) => {
         }
     })
     return (
-        <div className="w-full">
-            <GenericPostForm type="Update" formAction={action} state={state} />
+        <div className="w-[90%] md:w-[50%] mx-auto">
+            <GenericPostForm type="Yadda Saxla" formAction={action} state={state} />
         </div>
     )
 }

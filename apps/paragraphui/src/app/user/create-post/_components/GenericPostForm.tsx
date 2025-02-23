@@ -14,7 +14,7 @@ type Props = {
     formAction: (formdata: FormData) => void
 }
 
-const GenericPostForm = ({ state, formAction,type="save" }: Props) => {
+const GenericPostForm = ({ state, formAction,type="Paylaş" }: Props) => {
     const [imageUrl, setImageUrl] = useState("");
     const { toast } = useToast();
     useEffect(() => {
