@@ -17,7 +17,7 @@ export default async function Home({ searchParams }: Props) {
   return (
     <div className="bg-gradient-to-br text-white">
       <Hero />
-      <Posts posts={posts} currentPage={page ? +page : 1}
+      <Posts posts={posts || []} currentPage={page ? +page : 1}
         totalPages={Math.ceil(totalPosts / DEFAULT_PAGE_SIZE)} />
     </div>
   );
